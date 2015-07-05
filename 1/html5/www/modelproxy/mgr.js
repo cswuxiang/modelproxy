@@ -27,16 +27,14 @@ var g_files = {},listFiles = {},child = {};
 		
     });
 }
-rebootProcess('node',['./bin/www']);//��ʼ��ĳ����
-
+var mainChild = rebootProcess('node',['./bin/www']);//��ʼ��ĳ����
 //程序出错处理
 function crashProcess (prev, cur) {
     //if ( cur && +cur.mtime !== +prev.mtime|| crashProcess.status ) return;
     crashProcess.status = 1;//
     var child = exports.child;
-	console.log('crash process...');
+	console.log('crash process...'+child.pid);
     setTimeout(function() {
-		console.log(child.pid);
         process.kill(child.pid);
         crashProcess.status = 0;
     }, 50);
@@ -47,18 +45,15 @@ function crashProcess (prev, cur) {
  */
 var catchException = function(){
 	process.on('uncaughtException', function (err) {
-        JSlog.sendLog({msg:err,type:'error'});
+       console.log("uncaughtException");
     });
 };
 function start(func){
     var myChild = lpro.bootProcess('node',[ myRootDir + "/process/queryRootAllFiles.js"],function(path,type){
-                
     	func&&func();
-    
     });
    child['query'] = myChild;
    catchException();
-	
 }
-
+//启动程序
 start(crashProcess);
