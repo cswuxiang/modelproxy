@@ -1,37 +1,42 @@
 var httpRequest = {
-		/*var opt = {
-				 host:'这里放代理服务器的ip或者域名',
-				 port:'这里放代理服务器的端口号',
-				 method:'POST',//这里是发送的方法
-				 path:' https://www.google.com',     //这里是访问的路径
-				 headers:{
-				  //这里放期望发送出去的请求头
-				 }
-				}
-		*/
-		request :function(options,sucfun,failfunc){
+		request :function(options){
+			options = options || {};
 			var http = require('http');  
+			var newOptions = this.parseOptions(options);
 			//以下是接受数据的代码
 			var body = '';
-			var req = http.request(options, function (res) {  
+			var req = http.request(newOptions, function (res) {  
 			    console.log('STATUS: ' + res.statusCode);  
 			    console.log('HEADERS: ' + JSON.stringify(res.headers));  
 			    res.setEncoding('utf8');  
 			    res.on('data', function (d) {  
 			    	body += d;
-			    }) 
+			    }).on('end', function(){
+					options.success&&options.success(body); 
+			    }); 
 			});  
-			
-			req.on('end', function(){
-		    	sucfun&&sucfun(chunk); 
-		    }); 
 			
 			req.on('error', function (e) {  
-				failfunc&&failfunc(e);    
+				options.fail&&options.fail(e);    
 			});  
+			// write data to request body
+			this.setPostData(req,options);
 			req.end(); 
-			
-		}	
+		},
+		parseOptions:function(options){
+			var url = require('url');
+			var data = url.parse(options.url);
+			var opt = { hostname : data.hostname,
+				        port : data.port,
+					 	method:options.method || 'post',//这里是发送的方法
+					 	path:data.path     //这里是访问的路径
+					  };
+			return opt;
+		},
+		setPostData:function(req,options){
+			var data = require('querystring').stringify(options.data||{})
+			//req.write(data);
+		}
 }
 
 module.exports = httpRequest;
