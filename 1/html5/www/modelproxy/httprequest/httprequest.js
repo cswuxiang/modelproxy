@@ -27,11 +27,13 @@ var httpRequest = {
 			var url = require('url');
 			var data = url.parse(options.url);
 			var opt = { hostname : data.hostname,
-				        port : data.port,
-					 	method:options.method || 'post',//这里是发送的方法
+				        port : data.port || 80,
+					 	method:options.method || 'get',//这里是发送的方法
 					 	path:data.path,     //这里是访问的路径
 					 	headers: headers   
 					  };
+			
+			console.log(opt);
 			return opt;
 		},
 		setPostData:function(req,options){
