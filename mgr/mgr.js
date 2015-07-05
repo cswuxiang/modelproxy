@@ -24,7 +24,7 @@ rebootProcess('node',['../bin/www']);//��ʼ��ĳ����
 //�ر��߳�
 function crashProcess (prev, cur) {
     //if ( cur && +cur.mtime !== +prev.mtime|| crashProcess.status ) return;
-    crashProcess.status = 1;//�������������������߳�
+    crashProcess.status = 1;//
     var child = exports.child;
 	console.log('crash process...');
     setTimeout(function() {
@@ -33,5 +33,6 @@ function crashProcess (prev, cur) {
         crashProcess.status = 0;
     }, 50);
 }
-fs.watchFile("app.js",crashProcess);
+//todo:修改改成watchDir
+fs.watchFile("../app.js",crashProcess);
 
