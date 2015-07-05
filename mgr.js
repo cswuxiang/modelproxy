@@ -14,7 +14,7 @@ var g_files = {},listFiles = {},child = {};
  function rebootProcess(exec,args){
     args = args || []
 	//reboot();
-    var child = exports.child = cp.spawn(exec, args);//����һ�����߳�������
+    var child = exports.child = cp.spawn(exec, args);//
     child.stdout.addListener("data", function (data) {
        console.log('stdoutxx: ' + data);
     });
