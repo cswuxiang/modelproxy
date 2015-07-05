@@ -50,10 +50,10 @@ var catchException = function(){
         JSlog.sendLog({msg:err,type:'error'});
     });
 };
-function start(){
+function start(func){
     var myChild = lpro.bootProcess('node',[ myRootDir + "/process/queryRootAllFiles.js"],function(path,type){
                 
-    	console.log(333);
+    	func&&func();
     
     });
    child['query'] = myChild;
@@ -61,5 +61,4 @@ function start(){
 	
 }
 
-//lfile.watchFileChange("../app.js",crashProcess);
-start();
+start(crashProcess);
