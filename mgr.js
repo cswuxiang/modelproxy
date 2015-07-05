@@ -42,28 +42,24 @@ function crashProcess (prev, cur) {
     }, 50);
 }
 //todo:修改改成watchDir
-
+/**
+ * 全局错误回收
+ */
+var catchException = function(){
+	process.on('uncaughtException', function (err) {
+        JSlog.sendLog({msg:err,type:'error'});
+    });
+};
 function start(){
-	var regLog = /^%/;
     var myChild = lpro.bootProcess('node',[ myRootDir + "/process/queryRootAllFiles.js"],function(path,type){
-        	           if(type && type ==="error"){
-    	           	        JSlog.sendLog({msg:path,type:'error'});
-        	           }else{
-                        	if(path.match(regLog)){//日志处理
-                        		JSlog.sendLog(path.replace(regLog,""));
-                        	}else{
-                                path = path.replace("\n","");
-                                g_files[path] = path;
-                                //加入列表中
-                                PKF.listChangeFiles(g_files);
-                                storage.setItem("g_files",g_files);
-                        	}
-                      }
-                });
+                
+    	console.log(333);
+    
+    });
    child['query'] = myChild;
-   this.catchException();
+   catchException();
 	
 }
 
 //lfile.watchFileChange("../app.js",crashProcess);
-
+start();
