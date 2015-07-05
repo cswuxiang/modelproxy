@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/*', function(req, res, next) {
   //res.send('hi this is helloworld');
 	console.log("2222 : "+req.path);
-	if(req.path && req.path.match(/\/s(.*)/)) {//自身处理
+	if(req.path && req.path.match(/\/s\/(.*)/)) {//自身处理
 		res.send('hi this is self');
     }else {//其它逻辑处理
         return next();

@@ -8,7 +8,7 @@ var httpRequest = {
 			var req = http.request(newOptions, function (res) {  
 			    console.log('STATUS: ' + res.statusCode);  
 			    console.log('HEADERS: ' + JSON.stringify(res.headers));  
-			    res.setEncoding('utf8');  
+			    ///res.setEncoding('utf-8');  
 			    res.on('data', function (d) {  
 			    	body += d;
 			    }).on('end', function(){
