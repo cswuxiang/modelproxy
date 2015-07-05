@@ -1,6 +1,6 @@
 var config = {
 	domains:{//域名服务
-	    		hw : "http://lowinwu.com/"
+	    		mp : "http://lowinwu.com/"
 	         },
     watch:{//监听的文件
 	        dirs:[
