@@ -9,7 +9,7 @@ router.get('/*', function(req, res, next) {
 	//根据url中前面hw-->http://lowinwu.com/
 	var xpath = req.path;
 	xpath.match(/\/(.*)\//);
-	var newURL = xpath.replace("/"+RegExp.$1+"/",config[RegExp.$1]);
+	var newURL = xpath.replace("/"+RegExp.$1+"/",config["domain"][RegExp.$1]);
 	httprequest.request({
 		   type: req.method,
 		   url: newURL,
