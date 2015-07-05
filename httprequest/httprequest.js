@@ -35,8 +35,8 @@ var httpRequest = {
 		},
 		setPostData:function(req,options){
 			var data = require('querystring').stringify(options.data||{})
-			//req.write(data);
+			req.write(data);
 		}
 }
-
+///sdsdf
 module.exports = httpRequest;
