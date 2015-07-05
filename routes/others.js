@@ -5,11 +5,10 @@ var express = require('express');
 var router = express.Router();
 var httprequest = require('../httprequest/httprequest.js');
 router.get('/*', function(req, res, next) {
-	
 	//根据url中前面hw-->http://lowinwu.com/
 	var xpath = req.path;
 	xpath.match(/\/(.*)\//);
-	var newURL = xpath.replace("/"+RegExp.$1+"/",config["domain"][RegExp.$1]);
+	var newURL = xpath.replace("/"+RegExp.$1+"/",config["domains"][RegExp.$1]);
 	httprequest.request({
 		   type: req.method,
 		   url: newURL,
