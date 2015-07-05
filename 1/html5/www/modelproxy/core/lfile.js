@@ -169,7 +169,7 @@ var lfile = {
 		var result = {}, files = fs.readdirSync(root);
 		var _this = this;
 		files.forEach(function(file) {
-					var pathname = root + "/" + file, stat = fs
+					var pathname = root + "\/" + file, stat = fs
 							.lstatSync(pathname)
 					if (stat === undefined )
 						return
