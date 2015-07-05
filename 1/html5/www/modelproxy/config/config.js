@@ -1,13 +1,15 @@
 var config = {
-    //监听的文件
-    watch:{
+	domains:{//域名服务
+	    		hw : "http://lowinwu.com/"
+	         },
+    watch:{//监听的文件
 	        dirs:[
 		          {
 		        	  path:'D:\\project\\KCTWX\\www\\modelproxy',
 		        	  type:/(.html)|(.js)|(.shtml)|(\.css)|(\.hdf)$/
 		          }
 	          ]
-		  },
-	hw : "http://lowinwu.com/"
+		  }
+   
 }
 exports.config = config;   
