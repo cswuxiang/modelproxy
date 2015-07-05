@@ -1,5 +1,5 @@
 var httpRequest = {
-		request :function(options){
+		request :function(options,headers){
 			options = options || {};
 			var http = require('http');  
 			var newOptions = this.parseOptions(options);
@@ -23,13 +23,14 @@ var httpRequest = {
 			this.setPostData(req,options);
 			req.end(); 
 		},
-		parseOptions:function(options){
+		parseOptions:function(options,headers){
 			var url = require('url');
 			var data = url.parse(options.url);
 			var opt = { hostname : data.hostname,
 				        port : data.port,
 					 	method:options.method || 'post',//这里是发送的方法
-					 	path:data.path     //这里是访问的路径
+					 	path:data.path,     //这里是访问的路径
+					 	headers: headers   
 					  };
 			return opt;
 		},
