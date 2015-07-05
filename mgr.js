@@ -23,11 +23,11 @@ var g_files = {},listFiles = {},child = {};
     });
     child.addListener("exit", function () {
 	    console.log('new things');
-        rebootProcess(exec, args);//������ĳ����
+        rebootProcess(exec, args);//重启程序
 		
     });
 }
-var mainChild = rebootProcess('node',['./bin/www']);//��ʼ��ĳ����
+var mainChild = rebootProcess('node',['./bin/www']);
 //程序出错处理
 function crashProcess (prev, cur) {
     //if ( cur && +cur.mtime !== +prev.mtime|| crashProcess.status ) return;
@@ -39,7 +39,6 @@ function crashProcess (prev, cur) {
         crashProcess.status = 0;
     }, 50);
 }
-//todo:修改改成watchDir
 /**
  * 全局错误回收
  */
